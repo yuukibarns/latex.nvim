@@ -1,5 +1,3 @@
-local ts_utils = require("nvim-treesitter.ts_utils")
-
 local M = {}
 
 M._defaults = {
@@ -77,10 +75,10 @@ M._defaults = {
 }
 
 function M.tex_math_mode()
-	local node = ts_utils.get_node_at_cursor(0)
+	local node = vim.treesitter.get_node()
 	local root
 	if node then
-		root = ts_utils.get_root_for_node(node)
+		root = node:root()
 	end
 	if not root then
 		return false
@@ -118,7 +116,7 @@ function M.markdown_math_mode()
 	if M.tex_math_mode() then
 		return true
 	end
-	local node = ts_utils.get_node_at_cursor(0)
+	local node = vim.treesitter.get_node()
 	local parent
 	if node then
 		parent = node:parent()
