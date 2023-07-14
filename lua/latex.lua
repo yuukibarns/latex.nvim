@@ -20,10 +20,10 @@ L._defaults = {
   imaps = {
     enabled = true,
     add = {},
-    default_leader = "`"
+    default_leader = ";"
   },
   surrounds = {
-    enabled = false,
+    enabled = true,
     command = "c",
     environment = "e"
   }
