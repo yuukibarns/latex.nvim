@@ -7,7 +7,7 @@
    "\\bigcirc" "\\bigcup" "\\bigodot" "\\bigoplus" 
    "\\bigotimes" "\\bigsqcup" "\\bigtriangledown" "\\bigtriangleup" 
    "\\bigvee" "\\bigwedge" "\\bot" "\\bowtie" "\\bullet"
-   "\\cap" "\\cdot" "\\cdots" "\\circ" "\\cong" "\\coprod" 
+   "\\cap" "\\cdot" "\\cdots" "\\circ" "\\colon" "\\coloneqq" "\\cong" "\\coprod" 
    "\\copyright" "\\cup" "\\dagger" "\\dashv" "\\ddagger" 
    "\\ddots" "\\diamond" "\\div" "\\doteq" "\\dots" 
    "\\downarrow" "\\Downarrow" "\\equiv" "\\exists" "\\flat" 
@@ -58,6 +58,8 @@
    "\\cdot" "·"
    "\\cdots" "⋯"
    "\\circ" "∘"
+   "\\colon" ":"
+   "\\coloneqq" "≔"
    "\\cong" "≅"
    "\\coprod" "∐"
    "\\copyright" "©"
@@ -188,7 +190,7 @@
 (generic_command
   command: ((command_name) @text.math
   (#any-of? @text.math 
-   "\\aleph" "\\clubsuit" "colon" "coloneqq" "\\diamondsuit" "\\heartsuit"
+   "\\aleph" "\\clubsuit" "\\diamondsuit" "\\heartsuit"
    "\\spadesuit" "\\ell" "\\emptyset" "\\varnothing"
    "\\hbar" "\\imath" "\\infty"))
   (#has-ancestor? @text.math math_environment inline_formula displayed_equation)
@@ -196,8 +198,6 @@
   (#set-pairs! @text.math conceal
    "\\aleph" "ℵ"
    "\\clubsuit" "♣"
-   "\\colon" ":"
-   "\\coloneqq" "≔"
    "\\diamondsuit" "♢"
    "\\heartsuit" "♡"
    "\\spadesuit" "♠"
