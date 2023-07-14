@@ -2,12 +2,12 @@
 (generic_command
   command: ((command_name) @operator
   (#any-of? @operator
-   "\\|" "\\amalg" "\\angle" "\\approx" 
+   "\\|" "\\" "\\angle" "\\approx" 
    "\\ast" "\\asymp" "\\backslash" "\\bigcap" 
    "\\bigcirc" "\\bigcup" "\\bigodot" "\\bigoplus" 
    "\\bigotimes" "\\bigsqcup" "\\bigtriangledown" "\\bigtriangleup" 
    "\\bigvee" "\\bigwedge" "\\bot" "\\bowtie" "\\bullet"
-   "\\cap" "\\cdot" "\\cdots" "\\circ" "\\cong" "\\coprod" 
+   "\\cap" "\\cdot" "\\cdots" "\\circ" "colon" "coloneqq" "\\cong" "\\coprod" 
    "\\copyright" "\\cup" "\\dagger" "\\dashv" "\\ddagger" 
    "\\ddots" "\\diamond" "\\div" "\\doteq" "\\dots" 
    "\\downarrow" "\\Downarrow" "\\equiv" "\\exists" "\\flat" 
@@ -58,6 +58,8 @@
    "\\cdot" "·"
    "\\cdots" "⋯"
    "\\circ" "∘"
+   "\\colon" ":"
+   "\\coloneqq" "≔"
    "\\cong" "≅"
    "\\coprod" "∐"
    "\\copyright" "©"
