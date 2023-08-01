@@ -3,6 +3,7 @@ local L = {}
 L.imaps = require("latex.module.imaps")
 L.conceals = require("latex.module.conceals")
 L.surrounds = require("latex.module.surrounds")
+L.texlab = require("latex.module.texlab")
 
 L.__index = L
 
@@ -46,11 +47,6 @@ function L.setup(args)
 			L.conceals.init(args.conceals)
 			L.imaps.init(args.imaps, "tex")
 			L.surrounds.init(args.surrounds)
-		end,
-	})
-	vim.api.nvim_create_autocmd({ "LspAttach" }, {
-		pattern = { "*.tex" },
-		callback = function()
 			L.texlab.init(args.texlab)
 		end,
 	})
