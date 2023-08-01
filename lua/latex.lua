@@ -26,6 +26,8 @@ L._defaults = {
 		enabled = true,
 		command = "c",
 		environment = "e",
+		math = "$",
+		quotation = '"',
 	},
 }
 

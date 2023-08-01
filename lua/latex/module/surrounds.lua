@@ -68,6 +68,22 @@ function M.init(config)
 					end,
 				},
 			},
+			[config.math] = {
+				add = { "\\(", "\\)" },
+				find = "\\%(.-\\%)",
+				delete = "^(\\%()().-(\\%))()$",
+				change = {
+					target = "^\\(%()().-(\\%))()$",
+					replacement = function()
+						return { { "[", "\t" }, { "", "\\]" } }
+					end,
+				},
+			},
+			[config.quotation] = {
+				add = { "``", "''" },
+				find = "``.-''",
+				delete = "^(``)().-('')()$",
+			},
 		},
 	})
 end
