@@ -29,6 +29,13 @@ L._defaults = {
 		math = "$",
 		quotation = '"',
 	},
+	texlab = {
+		build = "<M-b>",
+		forward = "<M-f>",
+		cancel_build = "<M-x>",
+		close_env = "]]",
+		toggle_star = "tse",
+	},
 }
 
 function L.setup(args)
@@ -39,6 +46,7 @@ function L.setup(args)
 			L.conceals.init(args.conceals)
 			L.imaps.init(args.imaps, "tex")
 			L.surrounds.init(args.surrounds)
+			L.texlab.init(args.texlab)
 		end,
 	})
 	vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
