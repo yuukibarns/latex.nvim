@@ -46,6 +46,11 @@ function L.setup(args)
 			L.conceals.init(args.conceals)
 			L.imaps.init(args.imaps, "tex")
 			L.surrounds.init(args.surrounds)
+		end,
+	})
+	vim.api.nvim_create_autocmd({ "LspAttach" }, {
+		pattern = { "*.tex" },
+		callback = function()
 			L.texlab.init(args.texlab)
 		end,
 	})
