@@ -32,7 +32,7 @@ local close_env = function()
 		local text = envs[#envs].name.text
 		local pos = api.nvim_win_get_cursor(0)[2]
 		local line = api.nvim_get_current_line()
-		local nline = line:sub(0, pos) .. "\\end{" .. text .. "}"
+		local nline = line:sub(0, pos) .. "\\end{" .. text .. "}" .. line:sub(pos + 1)
 		vim.api.nvim_set_current_line(nline)
 	end, buf)
 end
