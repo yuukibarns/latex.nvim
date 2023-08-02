@@ -31,6 +31,7 @@ L._defaults = {
 		quotation = '"',
 	},
 	texlab = {
+		enabled = true,
 		build = "<M-b>",
 		forward = "<M-f>",
 		cancel_build = "<M-x>",

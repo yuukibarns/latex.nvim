@@ -30,7 +30,10 @@ local close_env = function()
 			return
 		end
 		local text = envs[#envs].name.text
-		vim.api.nvim_set_current_line("\\end{" .. text .. "}")
+		local pos = api.nvim_win_get_cursor(0)[2]
+		local line = api.nvim_get_current_line()
+		local nline = line:sub(0, pos) .. "\\end{" .. text .. "}"
+		vim.api.nvim_set_current_line(nline)
 	end, buf)
 end
 
@@ -63,6 +66,10 @@ local toggle_star = function()
 end
 
 function M.init(config)
+	if not config.enabled then
+		return
+	end
+
 	vim.keymap.set("n", config.build, vim.cmd.TexlabBuild, { buffer = true, desc = "Build LaTeX" })
 	vim.keymap.set("n", config.forward, vim.cmd.TexlabForward, { buffer = true, desc = "Forward Search" })
 	vim.keymap.set("n", config.cancel_build, cancel_build, { buffer = true, desc = "Cancel the current build" })
