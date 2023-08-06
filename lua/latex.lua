@@ -26,7 +26,6 @@ L._defaults = {
 	surrounds = {
 		enabled = true,
 		command = "c",
-		environment = "e",
 		math = "$",
 		quotation = '"',
 	},
@@ -36,6 +35,7 @@ L._defaults = {
 		forward = "<M-f>",
 		cancel_build = "<M-x>",
 		close_env = "]]",
+		change_env = "cse",
 		toggle_star = "tse",
 	},
 }
