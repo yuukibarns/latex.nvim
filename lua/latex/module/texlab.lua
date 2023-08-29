@@ -30,10 +30,9 @@ local close_env = function()
 			return
 		end
 		local text = envs[#envs].name.text
-		local pos = api.nvim_win_get_cursor(0)[2]
-		local line = api.nvim_get_current_line()
-		local nline = line:sub(0, pos) .. "\\end{" .. text .. "}" .. line:sub(pos + 1)
-		vim.api.nvim_set_current_line(nline)
+		local pos = api.nvim_win_get_cursor(0)
+		local row, col = pos[1], pos[2]
+		api.nvim_buf_set_text(buf, row, col, row, col, "\\end{" .. text .. "}")
 	end, buf)
 end
 
