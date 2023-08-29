@@ -32,7 +32,9 @@ local close_env = function()
 		local text = envs[#envs].name.text
 		local pos = api.nvim_win_get_cursor(0)
 		local row, col = pos[1] - 1, pos[2]
+		local length = #text + 6
 		api.nvim_buf_set_text(buf, row, col, row, col, { "\\end{" .. text .. "}" })
+		api.nvim_win_set_cursor(0, { row + 1, col + length })
 	end, buf)
 end
 
