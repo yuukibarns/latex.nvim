@@ -11,9 +11,9 @@
 (inline_formula "$" @conceal (#set! conceal ""))
 (inline_formula "\\(" @conceal (#set! conceal ""))
 (inline_formula "\\)" @conceal (#set! conceal ""))
+(displayed_equation "$$" @conceal (#set! conceal ""))
 (displayed_equation "\\[" @conceal (#set! conceal ""))
 (displayed_equation "\\]" @conceal (#set! conceal ""))
-(displayed_equation "$$" @conceal (#set! conceal ""))
 (text_mode
   command: _ @conceal (#set! conceal ""))
 ("\\item" @punctuation.special @conceal (#set! conceal "○"))
