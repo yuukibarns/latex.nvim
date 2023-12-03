@@ -5,8 +5,8 @@
   (#not-has-ancestor? @text.math text_mode label_definition)
   (#any-of? @text.math 
    "_0" "_1" "_2" "_3" "_4" "_5" "_6" "_7" "_8" "_9"
-   "_a" "_e" "_h" "_i" "_j" "_k" "_l" "_m" "_n" "_o" "_p" "_r" "_s" "_t"
-   "_u" "_v" "_x" "_\\.")
+   "_a" "_e" "_h" "_i" "_j" "_k" "_l" "_m" "_n" "_o"
+	 "_p" "_r" "_s" "_t" "_u" "_v" "_x" "_\\.")
   (#set-pairs! @text.math conceal
    "_0" "₀"
    "_1" "₁"
@@ -44,7 +44,8 @@
   (#not-has-ancestor? @text.math text_mode label_definition)
   (#any-of? @text.math 
    "0" "1" "2" "3" "4" "5" "6" "7" "8" "9"
-   "a" "e" "h" "i" "j" "k" "l" "m" "n" "o" "p" "r" "s" "t" "u" "v" "x" "\\.")
+   "a" "e" "h" "i" "j" "k" "l" "m" "n" "o"
+	 "p" "r" "s" "t" "u" "v" "x" "\\.")
   (#set-pairs! @text.math conceal
    "0" "₀"
    "1" "₁"
@@ -104,9 +105,9 @@
   "^0" "^1" "^2" "^3" "^4" "^5" "^6" "^7" "^8" "^9" 
   "^a" "^b" "^c" "^d" "^e" "^f" "^g" "^h" "^i" "^j" 
   "^k" "^l" "^m" "^n" "^o" "^p" "^r" "^s" "^t" "^u" 
-  "^v" "^w" "^x" "^y" "^z" "^A" "^B" "^D" "^E" "^G" 
-  "^H" "^I" "^J" "^K" "^L" "^M" "^N" "^O" "^P" "^R" 
-  "^T" "^U" "^V" "^W")
+  "^v" "^w" "^x" "^y" "^z"
+	"^A" "^B" "^D" "^E" "^G" "^H" "^I" "^J" "^K" "^L"
+	"^M" "^N" "^O" "^P" "^R" "^T" "^U" "^V" "^W")
   (#set-pairs! @text.math conceal
   "^0" "⁰"
   "^1" "¹"
@@ -169,9 +170,12 @@
   (#has-ancestor? @text.math math_environment inline_formula displayed_equation)
   (#not-has-ancestor? @text.math label_definition text_mode)
   (#any-of? @text.math
-  "0" "1" "2" "3" "4" "5" "6" "7" "8" "9" "a" "b" "c" "d" "e" "f" "g" "h" "i" 
-  "j" "k" "l" "m" "n" "o" "p" "r" "s" "t" "u" "v" "w" "x" "y" "z" 
-  "A" "B" "D" "E" "G" "H" "I" "J" "K" "L" "M" "N" "O" "P" "R" "T" "U" "V" "W")
+  "0" "1" "2" "3" "4" "5" "6" "7" "8" "9"
+	"a" "b" "c" "d" "e" "f" "g" "h" "i" "j"
+	"k" "l" "m" "n" "o" "p" "r" "s" "t" "u"
+	"v" "w" "x" "y" "z" 
+  "A" "B" "D" "E" "G" "H" "I" "J" "K" "L"
+	"M" "N" "O" "P" "R" "T" "U" "V" "W")
   (#set-pairs! @text.math conceal
   "0" "⁰"
   "1" "¹"
@@ -240,8 +244,8 @@
   "^<" "˂"
   "^>" "˃"
   "^/" "ˊ"
-  "^\." "˙"
-  "^=" "˭"))
+  "^=" "˭"
+	"^\." "˙"))
 
 (text
   word: (operator) @operator
@@ -256,6 +260,6 @@
   "<" "˂"
   ">" "˃"
   "/" "ˊ"
-  "\." "˙"
-  "=" "˭"))
+  "=" "˭"
+	"\." "˙"))
 

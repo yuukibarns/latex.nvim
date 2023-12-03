@@ -1,21 +1,19 @@
 ; greek conceal
 (generic_command
-  command: ((command_name) @text.math 
-  (#any-of? @text.math 
-   "\\alpha" "\\beta" "\\gamma" "\\delta"
-   "\\epsilon" "\\varepsilon" "\\zeta" "\\eta"
-   "\\theta" "\\vartheta" "\\iota" "\\kappa"
-   "\\lambda" "\\mu" "\\nu" "\\xi"
-   "\\pi" "\\varpi" "\\rho" "\\varrho"
-   "\\sigma" "\\varsigma" "\\tau" "\\upsilon"
-   "\\phi" "\\varphi" "\\chi" "\\psi"
-   "\\omega" "\\Gamma" "\\Delta" "\\Theta"
-   "\\Lambda" "\\Xi" "\\Pi" "\\Sigma"
-   "\\Upsilon" "\\Phi" "\\Chi" "\\Psi"
-   "\\Omega"))
-  (#has-ancestor? @text.math math_environment inline_formula displayed_equation)
-  (#not-has-ancestor? @text.math label_definition text_mode)
-  (#set-pairs! @text.math conceal 
+  command: ((command_name) @function 
+  (#any-of? @function 
+   "\\alpha" "\\beta" "\\gamma" "\\delta" "\\epsilon"
+	 "\\varepsilon" "\\zeta" "\\eta" "\\theta" "\\vartheta"
+	 "\\iota" "\\kappa" "\\lambda" "\\mu" "\\nu"
+	 "\\xi" "\\pi" "\\varpi" "\\rho" "\\varrho"
+   "\\sigma" "\\varsigma" "\\tau" "\\upsilon" "\\phi"
+	 "\\varphi" "\\chi" "\\psi" "\\omega"
+	 "\\Gamma" "\\Delta" "\\Theta" "\\Lambda" "\\Xi"
+	 "\\Pi" "\\Sigma" "\\Upsilon" "\\Phi" "\\Chi"
+	 "\\Psi" "\\Omega"))
+  (#has-ancestor? @function math_environment inline_formula displayed_equation)
+  (#not-has-ancestor? @function label_definition text_mode)
+  (#set-pairs! @function conceal 
    "\\alpha" "α" 
    "\\beta" "β"
    "\\gamma" "γ"

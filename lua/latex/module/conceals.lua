@@ -45,8 +45,8 @@ local function setpairs(match, _, source, predicate, metadata)
 	end
 	local node_text = vim.treesitter.get_node_text(node, source)
 	-- if metadata[capture_id] and metadata[capture_id].range then
-	--   local sr, sc, er, ec = unpack(metadata[capture_id].range)
-	--   node_text = vim.api.nvim_buf_get_text(source, sr, sc, er, ec, {})[1]
+	-- 	local sr, sc, er, ec = unpack(metadata[capture_id].range)
+	-- 	node_text = vim.api.nvim_buf_get_text(source, sr, sc, er, ec, {})[1]
 	-- end
 	for i = 4, #predicate, 2 do
 		if node_text == predicate[i] then
@@ -68,12 +68,12 @@ local function load_queries(args)
 	end
 	local strings = read_query_files(filenames) or ""
 	local added_query_start = [[(generic_command
-    command: ((command_name) @text.math
-    (#any-of? @text.math
+    command: ((command_name) @function
+    (#any-of? @function
   ]]
 	local added_query_middle = [[
   ))
-  (#set-pairs! @text.math conceal
+  (#set-pairs! @function conceal
   ]]
 	local added_query_end = "))"
 	for command, conceal in pairs(args.add) do
