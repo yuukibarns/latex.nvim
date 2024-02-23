@@ -10,11 +10,11 @@ L.__index = L
 L._defaults = {
 	conceals = {
 		enabled = {
+			"delim",
+			"font",
 			"greek",
 			"math",
 			"script",
-			"delim",
-			"font",
 		},
 		add = {},
 	},

@@ -6,8 +6,11 @@ There is no reason to prefer this plugin to [VimTeX](https://github.com/lervag/v
 ## Installation
 
 ```lua
--- packer.nvim
-use 'ryleelyman/latex.nvim'
+-- lazy.nvim
+{
+    "mathjiajia/latex.nvim",
+    config = true,
+}
 ```
 
 ## Requirements
@@ -22,35 +25,44 @@ and `markdown` and `markdown_inline` for `.md` files.
 To use `latex.nvim` you need to put
 
 ```lua
-require('latex').setup()
+require("latex").setup()
 ```
 
 somewhere in your config.
 This is equivalent to the following default configuration.
 
 ```lua
-require('latex').setup{
-  conceals = {
-    enabled = {
-      "greek",
-      "math",
-      "script",
-      "delim",
-      "font"
-    },
-    add = {}
-  },
-  imaps = {
-    enabled = true,
-    add = {},
-    default_leader = "`"
-  },
-  surrounds = {
-    enabled = false,
-    command = "c",
-    environment = "e",
-  },
-}
+require("latex").setup({
+	conceals = {
+		enabled = {
+			"delim",
+			"font",
+			"greek",
+			"math",
+			"script",
+		},
+		add = {},
+	},
+	imaps = {
+		enabled = true,
+		add = {},
+		default_leader = "`",
+	},
+	surrounds = {
+		enabled = false,
+		command = "c",
+		environment = "e",
+	},
+	texlab = {
+		enabled = true,
+		build = "<M-b>",
+		forward = "<M-f>",
+		cancel_build = "<M-x>",
+		close_env = "]]",
+		change_env = "cse",
+		toggle_star = "tse",
+	},
+})
 ```
 
 See below for more about configuring `imaps`.
@@ -96,47 +108,49 @@ for example the default mapping
     wrap_char = true
   }
  }
- ```
- yields, after inputting "#BZ" in math mode, the output "\mathbb{Z}".
- 
- ### Conceals
- 
- Almost all of the low-hanging fruit is done as far as concealing;
- hard things like using tree-sitter for `\'e` to `é` are not a priority.
- 
- You can disable conceals on a per-file basis by redefining `conceals.enabled` in the `setup` function.
- 
- Currently the conceals provided are:
- - Greek: things like `\sigma` to `σ`
- - Math: things like `\amalg` to `⨿`
- - Script: superscripts and subscripts
- - Delim: things like `\left` and many instances of curly braces.
- - Font: things like `\mathbb{Z}` to `ℤ`
+```
+
+yields, after inputting "#BZ" in math mode, the output "\mathbb{Z}".
+
+### Conceals
+
+Almost all of the low-hanging fruit is done as far as concealing;
+hard things like using tree-sitter for `\'e` to `é` are not a priority.
+
+You can disable conceals on a per-file basis by redefining `conceals.enabled` in the `setup` function.
+
+Currently the conceals provided are:
+
+- Delim: things like `\left` and many instances of curly braces.
+- Font: things like `\mathbb{Z}` to `ℤ`
+- Greek: things like `\sigma` to `σ`
+- Math: things like `\amalg` to `⨿`
+- Script: superscripts and subscripts
 
 You can add your own concealed commands to the `conceals.add` table in the following format
 
 ```lua
 add = {
-  ["colon"] = ":"
+	["colon"] = ":",
 }
 ```
 
 The key should be the command name with the leading backslash stripped,
 and the value should be the single-character conceal to replace that command with.
 The `add` table is for concealing `generic_command` elements.
-Unlike most other conceals, these are *not* sensitive to the presence or absence of math mode.
- 
- ### Surrounds
+Unlike most other conceals, these are _not_ sensitive to the presence or absence of math mode.
 
- Requires [nvim-surround](https://github.com/kylechui/nvim-surround).
- Provides `add`, `change` and `delete` for commands and environments.
- With default settings for `nvim-surround`, these are mapped to,
- for example, `csc` for `c`hange `s`urrounding `c`ommand and
- `dse` for `d`elete `s`urrounding `e`nvironment.
+### Surrounds
 
- To enable, set `surrounds.enabled` to `true`.
+Requires [nvim-surround](https://github.com/kylechui/nvim-surround).
+Provides `add`, `change` and `delete` for commands and environments.
+With default settings for `nvim-surround`, these are mapped to,
+for example, `csc` for `c`hange `s`urrounding `c`ommand and
+`dse` for `d`elete `s`urrounding `e`nvironment.
 
- ## Non-features
- 
- - compilation, forward/backward search, completion, linting—use [texlab](https://github.com/latex-lsp/texlab)
- - highlighting—use treesitter
+To enable, set `surrounds.enabled` to `true`.
+
+## Non-features
+
+- compilation, forward/backward search, completion, linting—use [texlab](https://github.com/latex-lsp/texlab)
+- highlighting—use treesitter

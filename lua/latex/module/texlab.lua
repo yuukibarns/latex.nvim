@@ -1,5 +1,11 @@
 local api, lsp = vim.api, vim.lsp
-local lspconfig = require("lspconfig")
+
+local texlab_build_status = vim.tbl_add_reverse_lookup({
+	Success = 0,
+	Error = 1,
+	Failure = 2,
+	Cancelled = 3,
+})
 
 local M = {}
 
@@ -7,82 +13,115 @@ local cancel_build = function()
 	local buf = api.nvim_get_current_buf()
 
 	local params = lsp.util.make_position_params()
-	local client = lspconfig.util.get_active_client_by_name(buf, "texlab")
+	local client = lsp.get_clients({ bufnr = buf, name = "texlab" })[1]
 
-	client.request("workspace/executeCommand", {
-		command = "texlab.cancelBuild",
-		arguments = { params },
-	}, function() end, buf)
+	if client then
+		client.request("workspace/executeCommand", {
+			command = "texlab.cancelBuild",
+			arguments = { params },
+		}, function(err, result)
+			if err then
+				error(tostring(err))
+			end
+			print("Build " .. texlab_build_status[result.status])
+		end, buf)
+	else
+		print("method workspace/executeCommand is not supported by any servers active on the current buffer")
+	end
 end
 
 local close_env = function()
 	local buf = api.nvim_get_current_buf()
 
 	local params = lsp.util.make_position_params()
-	local client = lspconfig.util.get_active_client_by_name(buf, "texlab")
+	local client = lsp.get_clients({ bufnr = buf, name = "texlab" })[1]
 
-	client.request("workspace/executeCommand", {
-		command = "texlab.findEnvironments",
-		arguments = { params },
-	}, function(_, envs, _)
-		if #envs == 0 then
-			print("No environment found")
-			return
-		end
-		local text = envs[#envs].name.text
-		api.nvim_put({ "\\end{" .. text .. "}" }, "", false, true)
-	end, buf)
+	if client then
+		client.request("workspace/executeCommand", {
+			command = "texlab.findEnvironments",
+			arguments = { params },
+		}, function(err, result)
+			if err then
+				error(tostring(err))
+			end
+
+			if #result == 0 then
+				print("No environment found")
+				return
+			end
+			local text = result[#result].name.text
+			api.nvim_put({ "\\end{" .. text .. "}" }, "", false, true)
+		end, buf)
+	else
+		print("method workspace/executeCommand is not supported by any servers active on the current buffer")
+	end
 end
 
 local toggle_star = function()
 	local buf = api.nvim_get_current_buf()
 
 	local params = lsp.util.make_position_params()
-	local client = lspconfig.util.get_active_client_by_name(buf, "texlab")
+	local client = lsp.get_clients({ bufnr = buf, name = "texlab" })[1]
 
-	client.request("workspace/executeCommand", {
-		command = "texlab.findEnvironments",
-		arguments = { params },
-	}, function(_, envs, _)
-		if #envs == 0 then
-			print("No environment found")
-			return
-		end
-		local text = envs[#envs].name.text
-		if text:sub(#text) == "*" then
-			text = text:sub(1, #text - 1)
-		else
-			text = text .. "*"
-		end
-		params.newName = text
+	if client then
 		client.request("workspace/executeCommand", {
-			command = "texlab.changeEnvironment",
+			command = "texlab.findEnvironments",
 			arguments = { params },
-		}, function() end, buf)
-	end, buf)
+		}, function(err, result)
+			if err then
+				error(tostring(err))
+			end
+
+			if #result == 0 then
+				print("No environment found")
+				return
+			end
+			local text = result[#result].name.text
+			if text:sub(#text) == "*" then
+				text = text:sub(1, #text - 1)
+			else
+				text = text .. "*"
+			end
+			params.newName = text
+			client.request("workspace/executeCommand", {
+				command = "texlab.changeEnvironment",
+				arguments = { params },
+			}, function() end, buf)
+		end, buf)
+	else
+		print("method workspace/executeCommand is not supported by any servers active on the current buffer")
+	end
 end
 
 local change_env = function()
 	local buf = api.nvim_get_current_buf()
 
 	local params = lsp.util.make_position_params()
-	local client = lspconfig.util.get_active_client_by_name(buf, "texlab")
+	local client = lsp.get_clients({ bufnr = buf, name = "texlab" })[1]
 
-	client.request("workspace/executeCommand", {
-		command = "texlab.findEnvironments",
-		arguments = { params },
-	}, function(_, envs, _)
-		if #envs == 0 then
-			print("No environment found")
-			return
-		end
-		local text = envs[#envs].name.text
-		params.newName = vim.fn.input({ prompt = "New Environment Name:", default = text })
+	if client then
 		client.request("workspace/executeCommand", {
-			command = "texlab.changeEnvironment",
+			command = "texlab.findEnvironments",
 			arguments = { params },
-		}, function() end, buf)
-	end, buf)
+		}, function(err, result)
+			if err then
+				error(tostring(err))
+			end
+
+			if #result == 0 then
+				print("No environment found")
+				return
+			end
+			local text = result[#result].name.text
+			params.newName = vim.fn.input({ prompt = "New Environment Name:", default = text })
+			client.request("workspace/executeCommand", {
+				command = "texlab.changeEnvironment",
+				arguments = { params },
+			}, function() end, buf)
+		end, buf)
+	else
+		print("method workspace/executeCommand is not supported by any servers active on the current buffer")
+	end
 end
 
 function M.init(config)

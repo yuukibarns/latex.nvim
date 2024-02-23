@@ -17,49 +17,54 @@ local function read_query_files(filenames)
 	return contents
 end
 
-local function hasgrandparent(match, _, _, predicate)
-	local node = match[predicate[2]]
-	for _ = 1, 2 do
-		if not node then
-			return false
-		end
-		node = node:parent()
-	end
-	if not node then
-		return false
-	end
-	local ancestor_types = { unpack(predicate, 3) }
-	if vim.tbl_contains(ancestor_types, node:type()) then
+---@param match TSMatch
+---@param pred string[]
+---@return boolean
+local function hasgrandparent(match, _, _, pred)
+	local nodes = match[pred[2]]
+	if not nodes or #nodes == 0 then
 		return true
+	end
+
+	local types = { unpack(pred, 3) }
+	for _, node in ipairs(nodes) do
+		if vim.list_contains(types, node:parent():parent():type()) then
+			return true
+		end
 	end
 	return false
 end
 
-local function setpairs(match, _, source, predicate, metadata)
+---@param match TSMatch
+---@param pred string[]
+local function setpairs(match, _, source, pred, metadata)
 	-- (#set-pairs! @aa key list)
-	local capture_id = predicate[2]
-	local node = match[capture_id]
-	local key = predicate[3]
-	if not node then
+	local id = pred[2]
+	local key = pred[3]
+	local nodes = match[id]
+	if not nodes or #nodes == 0 then
 		return
 	end
-	local node_text = vim.treesitter.get_node_text(node, source)
-	-- if metadata[capture_id] and metadata[capture_id].range then
-	-- 	local sr, sc, er, ec = unpack(metadata[capture_id].range)
-	-- 	node_text = vim.api.nvim_buf_get_text(source, sr, sc, er, ec, {})[1]
-	-- end
-	for i = 4, #predicate, 2 do
-		if node_text == predicate[i] then
-			metadata[key] = predicate[i + 1]
-			break
+
+	for _, node in ipairs(nodes) do
+		local node_text = vim.treesitter.get_node_text(node, source)
+		-- if metadata[capture_id] and metadata[capture_id].range then
+		-- 	local sr, sc, er, ec = unpack(metadata[capture_id].range)
+		-- 	node_text = vim.api.nvim_buf_get_text(source, sr, sc, er, ec, {})[1]
+		-- end
+		for i = 4, #pred, 2 do
+			if node_text == pred[i] then
+				metadata[key] = pred[i + 1]
+				break
+			end
 		end
 	end
 end
 
 local function load_queries(args)
 	local filenames = vim.treesitter.query.get_files("latex", "highlights")
-	vim.treesitter.query.add_predicate("has-grandparent?", hasgrandparent, true)
-	vim.treesitter.query.add_directive("set-pairs!", setpairs, true)
+	vim.treesitter.query.add_predicate("has-grandparent?", hasgrandparent, { force = true })
+	vim.treesitter.query.add_directive("set-pairs!", setpairs, { force = true, all = true })
 	for _, name in ipairs(args.enabled) do
 		local files = vim.api.nvim_get_runtime_file("queries/latex/conceal_" .. name .. ".scm", true)
 		for _, file in ipairs(files) do
@@ -70,11 +75,11 @@ local function load_queries(args)
 	local added_query_start = [[(generic_command
     command: ((command_name) @function
     (#any-of? @function
-  ]]
+	]]
 	local added_query_middle = [[
-  ))
-  (#set-pairs! @function conceal
-  ]]
+	))
+	(#set-pairs! @function conceal
+	]]
 	local added_query_end = "))"
 	for command, conceal in pairs(args.add) do
 		added_query_start = added_query_start .. '"\\\\' .. command .. '" '
