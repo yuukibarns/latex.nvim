@@ -19,7 +19,7 @@ L._defaults = {
 		add = {},
 	},
 	imaps = {
-		enabled = true,
+		enabled = false,
 		add = {},
 		default_leader = ";",
 	},
