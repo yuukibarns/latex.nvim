@@ -1,7 +1,7 @@
 ; math conceals
 (generic_command
-  command: ((command_name) @function
-  (#any-of? @function
+  command: ((command_name) @conceal
+  (#any-of? @conceal
 	 "\\{" "\\}"
 	 "\\|"
 	 "\\aleph"
@@ -158,9 +158,9 @@
 	 "\\wedge"
 	 "\\wp"
 	 "\\wr"))
-  (#has-ancestor? @function math_environment inline_formula displayed_equation)
-  (#not-has-ancestor? @function label_definition text_mode)
-  (#set-pairs! @function conceal
+  (#has-ancestor? @conceal math_environment inline_formula displayed_equation)
+  (#not-has-ancestor? @conceal label_definition text_mode)
+  (#set-pairs! @conceal conceal
 	 "\\{" "{"
 	 "\\}" "}"
 	 "\\|" "‖"

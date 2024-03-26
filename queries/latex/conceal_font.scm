@@ -4,10 +4,10 @@
 	(#set! conceal ""))
 
 ((generic_command
-	command: (command_name) @function
-	arg: (curly_group)) @text.math
-	(#lua-match? @text.math "\\mathbb{%u}")
-	(#set-pairs! @text.math conceal
+	command: (command_name)
+	arg: (curly_group)) @conceal
+	(#lua-match? @conceal "\\mathbb{%u}")
+	(#set-pairs! @conceal conceal
 	 "\\mathbb{A}" "𝔸"
 	 "\\mathbb{B}" "𝔹"
 	 "\\mathbb{C}" "ℂ"
@@ -36,10 +36,10 @@
 	 "\\mathbb{Z}" "ℤ"))
 
 ((generic_command
-	command: (command_name) @function
-	arg: (curly_group)) @text.math
-	(#lua-match? @text.math "\\mathcal{%u}")
-	(#set-pairs! @text.math conceal
+	command: (command_name)
+	arg: (curly_group)) @conceal
+	(#lua-match? @conceal "\\mathcal{%u}")
+	(#set-pairs! @conceal conceal
 	 "\\mathcal{A}" "𝓐"
 	 "\\mathcal{B}" "𝓑"
 	 "\\mathcal{C}" "𝓒"
@@ -68,10 +68,10 @@
 	 "\\mathcal{Z}" "𝓩"))
 
 ((generic_command
-	command: (command_name) @function
-	arg: (curly_group)) @text.math
-	(#lua-match? @text.math "\\mathfrak{[a-Z]}")
-	(#set-pairs! @text.math conceal
+	command: (command_name)
+	arg: (curly_group)) @conceal
+	(#lua-match? @conceal "\\mathfrak{[a-Z]}")
+	(#set-pairs! @conceal conceal
 	 "\\mathfrak{a}" "𝔞"
 	 "\\mathfrak{b}" "𝔟"
 	 "\\mathfrak{c}" "𝔠"
@@ -126,10 +126,10 @@
 	 "\\mathfrak{Z}" "ℨ"))
 
 ((generic_command
-	command: (command_name) @function
-	arg: (curly_group)) @text.math
-	(#lua-match? @text.math "\\mathscr{[a-Z]}")
-	(#set-pairs! @text.math conceal
+	command: (command_name)
+	arg: (curly_group)) @conceal
+	(#lua-match? @conceal "\\mathscr{[a-Z]}")
+	(#set-pairs! @conceal conceal
 	 "\\mathscr{A}" "𝓐"
 	 "\\mathscr{B}" "𝓑"
 	 "\\mathscr{C}" "𝓒"
@@ -158,10 +158,10 @@
 	 "\\mathscr{Z}" "𝓩"))
 
 ((generic_command
-	command: (command_name) @function
-	arg: (curly_group)) @text.math
-	(#lua-match? @text.math "\\mathsf{[a-Z]}")
-	(#set-pairs! @text.math conceal
+	command: (command_name)
+	arg: (curly_group)) @conceal
+	(#lua-match? @conceal "\\mathsf{[a-Z]}")
+	(#set-pairs! @conceal conceal
 	 "\\mathsf{a}" "𝖺"
 	 "\\mathsf{b}" "𝖻"
 	 "\\mathsf{c}" "𝖼"
