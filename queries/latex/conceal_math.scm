@@ -6,6 +6,8 @@
 							"\\{"
 							"\\}"
 							"\\|"
+							"\\langle"
+							"\\rangle"
 							"\\varnothing"
 							))
   (#has-ancestor? @conceal math_environment inline_formula displayed_equation)
@@ -15,5 +17,7 @@
    "\\{" "{"
    "\\}" "}"
    "\\|" "‖"
+   "\\langle" "⟨"
+   "\\rangle" "⟩"
    "\\varnothing" "∅"
    ))

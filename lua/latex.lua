@@ -16,6 +16,7 @@ L._defaults = {
 			"font",
 			"greek",
 			"math",
+			-- "mleftright",
 			"script",
 		},
 		add = {},
