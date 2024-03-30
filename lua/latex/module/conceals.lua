@@ -73,12 +73,12 @@ local function load_queries(args)
 	end
 	local strings = read_query_files(filenames) or ""
 	local added_query_start = [[(generic_command
-    command: ((command_name) @function
-    (#any-of? @function
+    command: ((command_name) @conceal
+    (#any-of? @conceal
 	]]
 	local added_query_middle = [[
 	))
-	(#set-pairs! @function conceal
+	(#set-pairs! @conceal conceal
 	]]
 	local added_query_end = "))"
 	for command, conceal in pairs(args.add) do

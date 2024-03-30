@@ -10,6 +10,8 @@ L.__index = L
 L._defaults = {
 	conceals = {
 		enabled = {
+			"amssymb",
+			"core",
 			"delim",
 			"font",
 			"greek",

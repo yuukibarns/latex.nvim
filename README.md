@@ -35,6 +35,7 @@ This is equivalent to the following default configuration.
 require("latex").setup({
 	conceals = {
 		enabled = {
+            "amssymb",
 			"delim",
 			"font",
 			"greek",
