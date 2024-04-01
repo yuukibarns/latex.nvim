@@ -337,5 +337,4 @@
    "\\sqrt" "√"
    "\\colon" ":"
    "\\coloneqq" "≔"
-   "\\eqqcolon" "≕"
-   ))
+   "\\eqqcolon" "≕"))

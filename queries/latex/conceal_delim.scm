@@ -4,8 +4,8 @@
 
 (math_delimiter
   [
-   left_command: _ @conceal 
-   right_command: _ @conceal 
+   left_command: _ @conceal
+   right_command: _ @conceal
    ]
   (#set! conceal ""))
 
