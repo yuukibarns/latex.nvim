@@ -33,36 +33,36 @@ This is equivalent to the following default configuration.
 
 ```lua
 require("latex").setup({
-	conceals = {
-		enabled = {
+    conceals = {
+        enabled = {
             "amssymb",
-			"delim",
-			"font",
-			"greek",
-			"math",
-			"script",
-		},
-		add = {},
-	},
-	imaps = {
-		enabled = true,
-		add = {},
-		default_leader = "`",
-	},
-	surrounds = {
-		enabled = false,
-		command = "c",
-		environment = "e",
-	},
-	texlab = {
-		enabled = true,
-		build = "<M-b>",
-		forward = "<M-f>",
-		cancel_build = "<M-x>",
-		close_env = "]]",
-		change_env = "cse",
-		toggle_star = "tse",
-	},
+            "delim",
+            "font",
+            "greek",
+            "math",
+            "script",
+    },
+    add = {},
+  },
+  imaps = {
+    enabled = true,
+    add = {},
+    default_leader = "`",
+  },
+  surrounds = {
+    enabled = false,
+    command = "c",
+    environment = "e",
+  },
+  texlab = {
+    enabled = true,
+    build = "<M-b>",
+    forward = "<M-f>",
+    cancel_build = "<M-x>",
+    close_env = "]]",
+    change_env = "cse",
+    toggle_star = "tse",
+  },
 })
 ```
 
@@ -132,7 +132,7 @@ You can add your own concealed commands to the `conceals.add` table in the follo
 
 ```lua
 add = {
-	["colon"] = ":",
+    ["colon"] = ":",
 }
 ```
 
