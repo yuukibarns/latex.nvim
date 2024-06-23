@@ -13,14 +13,13 @@ local close_env = function()
 			arguments = { params },
 		}, function(err, result)
 			if err then
-				error(tostring(err))
+				return vim.notify(err.code .. ": " .. err.message, vim.log.levels.ERROR)
+			end
+			if #result == 0 then
+				return vim.notify("No environment found", vim.log.levels.WARN)
 			end
 
-			if #result == 0 then
-				print("No environment found")
-				return
-			end
-			local text = result[#result].name.text
+			local text = result[-1].name.text
 			api.nvim_put({ "\\end{" .. text .. "}" }, "", false, true)
 		end, bufnr)
 	else
