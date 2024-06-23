@@ -19,7 +19,7 @@ local close_env = function()
 				return vim.notify("No environment found", vim.log.levels.WARN)
 			end
 
-			local text = result[-1].name.text
+			local text = result[#result].name.text
 			api.nvim_put({ "\\end{" .. text .. "}" }, "", false, true)
 		end, bufnr)
 	else
