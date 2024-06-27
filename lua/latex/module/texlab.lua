@@ -45,7 +45,7 @@ local toggle_star = function()
 			end
 
 			local text = result[#result].name.text
-			params.newNeme = text:sub(-1) == "*" and text:sub(1, -2) or text .. "*"
+			params.newName = text:sub(-1) == "*" and text:sub(1, -2) or text .. "*"
 			vim.lsp.buf.execute_command({
 				command = "texlab.changeEnvironment",
 				arguments = { params },
