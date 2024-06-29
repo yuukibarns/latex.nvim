@@ -1,8 +1,39 @@
 (generic_command
   command: (command_name) @conceal
-  (#any-of? @conceal "\\emph" "\\mathit" "\\textit" "\\mathbf" "\\textbf")
+  (#any-of? @conceal "\\emph" "\\mathit" "\\textit" "\\mathbf" "\\textbf" "\\mathrm" "\\bm" "\\vec")
   (#set! conceal ""))
-
+((generic_command
+   command: (command_name)
+   arg: (curly_group)) @conceal
+ (#lua-match? @conceal "\\mathrm{[di]}")
+ (#set-pairs! @conceal conceal
+  "\\mathrm{d}" "d"
+  "\\mathrm{i}" "i"
+  ))
+((generic_command
+   command: (command_name)
+   arg: (curly_group)) @conceal
+ (#lua-match? @conceal "\\frac{[123456789]}{[2345678910]}" )
+ (#set-pairs! @conceal conceal 
+  "\\frac{1}{2}" "½"
+   "\\frac{1}{3}" "⅓"
+   "\\frac{1}{4}" "¼"
+   "\\frac{1}{5}" "⅕"
+   "\\frac{1}{6}" "⅙"
+   "\\frac{1}{7}" "⅐"
+   "\\frac{1}{8}" "⅛"
+   "\\frac{1}{9}" "⅑"
+   "\\frac{1}{10}" "⅒"
+   "\\frac{2}{3}" "⅔"
+   "\\frac{2}{5}" "⅖"
+   "\\frac{3}{4}" "¾"
+   "\\frac{3}{5}" "⅗"
+   "\\frac{3}{8}" "⅜"
+   "\\frac{4}{5}" "⅘"
+   "\\frac{5}{6}" "⅚"
+   "\\frac{5}{8}" "⅝"
+   "\\frac{7}{8}" "⅞"
+  ))
 ((generic_command
    command: (command_name)
    arg: (curly_group)) @conceal
@@ -521,7 +552,7 @@
 ((generic_command
    command: (command_name)
    arg: (curly_group)) @conceal
- (#lua-match? @conceal "\\mathfrak{[a-Z]}")
+ (#lua-match? @conceal "\\mathfrak{[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ]}")
  (#set-pairs! @conceal conceal
   "\\mathfrak{a}" "𝔞"
   "\\mathfrak{b}" "𝔟"
@@ -579,7 +610,7 @@
 ((generic_command
    command: (command_name)
    arg: (curly_group)) @conceal
- (#lua-match? @conceal "\\mathscr{[a-Z]}")
+ (#lua-match? @conceal "\\mathscr{%u}")
  (#set-pairs! @conceal conceal
   "\\mathscr{A}" "𝓐"
   "\\mathscr{B}" "𝓑"
@@ -611,7 +642,7 @@
 ((generic_command
    command: (command_name)
    arg: (curly_group)) @conceal
- (#lua-match? @conceal "\\mathsf{[a-Z]}")
+ (#lua-match? @conceal "\\mathsf{[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ]}")
  (#set-pairs! @conceal conceal
   "\\mathsf{a}" "𝖺"
   "\\mathsf{b}" "𝖻"

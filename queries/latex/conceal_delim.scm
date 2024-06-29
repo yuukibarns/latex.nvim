@@ -1,6 +1,6 @@
-(curly_group ["{" "}"] @conceal
-			 (#not-has-grandparent? @conceal title_declaration author_declaration chapter part section subsection subsubsection paragraph subparagraph generic_command)
-			 (#set! conceal ""))
+; (curly_group ["{" "}"] @conceal
+; 			 (#not-has-grandparent? @conceal title_declaration author_declaration chapter part section subsection subsubsection paragraph subparagraph generic_command)
+; 			 (#set! conceal ""))
 
 (math_delimiter
   [
